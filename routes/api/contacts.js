@@ -1,10 +1,17 @@
-const express = require('express')
+const express = require('express');
+const Joi = require("joi");
 
 const contactsService = require("../../models/contacts");
 
 const { HttpError } = require("../../helpers");
 
 const router = express.Router();
+
+const contactAddSchema = Joi.object({
+  name: Joi.string().required(),
+  email: Joi.string().required(),
+  number: Joi.string().required(),
+});
 
 router.get('/', async (req, res, next) => {
   try {
@@ -22,12 +29,6 @@ router.get('/:id', async (req, res, next) => {
     const result = await contactsService.getContactById(id);
     if (!result) {
       throw HttpError(404, "No found");
-      // const error = new Error("No found");
-      // error.status = 404;
-      // throw error;
-      // return res.status(404).json({
-      //   message: "No found"
-      // });
     }
     res.json(result);
   }
@@ -37,7 +38,17 @@ router.get('/:id', async (req, res, next) => {
 });
 
 router.post('/', async (req, res, next) => {
-  res.json({ message: 'template message' })
+  try { 
+    const { error } = contactAddSchema.validate(req.body);
+    if (error) {
+      throw HttpError(400, error.message)
+    }
+    const result = await contactsService.addContact(req.body);
+    res.status(201).json(result);
+  }
+  catch (error) {
+    next(error);
+ }
 })
 
 router.delete('/:contactId', async (req, res, next) => {

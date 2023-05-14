@@ -19,7 +19,7 @@ app.use((req, res) => {
 })
 
 app.use((err, req, res, next) => {
-  const { status = 500, message = "Not Found" } = err;
+  const { status = 500, message = "Not found" } = err;
   res.status(status).json({ message })
 })
 
