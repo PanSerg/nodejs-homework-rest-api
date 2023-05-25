@@ -31,4 +31,4 @@ contactSchemaDb.post("save", handleMongooseError);
 
 const Contact = model('Contact', contactSchemaDb);
 
-module.exports = {Contact};
+module.exports = Contact;
