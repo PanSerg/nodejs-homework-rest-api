@@ -16,7 +16,4 @@ const schemas = {
   updateFavoriteSchema
 };
 
-module.exports = {
-  schemas,
-  updateFavoriteSchema
-};
+module.exports = schemas;
