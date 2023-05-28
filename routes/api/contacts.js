@@ -19,14 +19,14 @@ router.patch(
   "/:contactId/favorite",
   isValidId,
   validateBody(schemas.updateFavoriteSchema),
-  ctrl.listContacts.updateContactSchema
+  ctrl.listContacts
 );
 
 router.put(
   "/:contactId",
   isValidId,
   validateBody(schemas.contactAddSchema),
-  ctrl.listContacts.updateById
+  ctrl.listContacts
 );
 
 router.delete("/:contactId", isValidId, ctrl.removeContact);
