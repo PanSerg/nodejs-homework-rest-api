@@ -1,6 +1,6 @@
 const express = require('express');
-const ctrl = require("../controllers/User/index");
-const { validateBody } = require("../middlewares");
+const ctrl = require("../../controllers/Users/index");
+const { validateBody } = require("../middlewares/validateBody");
 const {schemas} = require("../../models/user");
 const router = express.Router();
 

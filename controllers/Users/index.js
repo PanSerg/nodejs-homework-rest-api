@@ -1,4 +1,4 @@
-const { ctrlWrapper } = require("../../helpers");
+const { ctrlWrapper } = require("../../helpers/ctrlWrappers");
 const register = require("./register");
 
 module.exports = {
