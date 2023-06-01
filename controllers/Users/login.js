@@ -22,11 +22,19 @@ const login = async (req, res) => {
        id: user._id,
     };
     // Хеширование токена
-    const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "23h" });
-    console.log(token);
+  const { subscription } = user;
+  const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "23h" });
+   await User.findByIdAndUpdate(user._id, { token });
+  res.json({ token, user: {email, subscription} });
 
-    // const decodeToken = jwt.decode(token);
-    // console.log(decodeToken);
+  // Хеширование пароля
+    const result = await bcrypt.hash(password, 10);
+ 
+  const newUser = await User.create({ ...req.body, password: result });
+ // Возврат данных на фронт
+  res
+    .status(201)
+    .json({ email: newUser.email, subscription: newUser.subscription });
 };
 
 module.exports = login;

@@ -20,6 +20,11 @@ const contactSchemaDb = new Schema(
             type: Boolean,
             default: false,
         },
+        owner: {
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+            required: true,
+        },
     },
     {
         versionKey: false,
