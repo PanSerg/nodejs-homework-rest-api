@@ -17,7 +17,6 @@ const login = async (req, res) => {
           throw new HttpError(401, "Email or password invalid");
     }
     // Возвращение данных для хеширования
-
      const payload = {
        id: user._id,
     };
