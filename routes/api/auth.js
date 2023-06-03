@@ -10,7 +10,7 @@ router.post(
   ctrl.register
 );
 
-router.post("/login", validateBody(authSchema.authSchema), ctrl.login);
+router.post("/login", validateBody(authSchema.loginSchema), ctrl.login);
 
 router.get("/current", authenticate, ctrl.getCurrent);
 
