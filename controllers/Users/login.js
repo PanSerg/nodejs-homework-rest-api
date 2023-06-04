@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../../models/user");
-const { HttpError } = require("../../helpers/HttpError");
+const  HttpError = require("../../helpers/HttpError");
 const { SECRET_KEY } = process.env;
 
 // Ищем пользователя по его email
