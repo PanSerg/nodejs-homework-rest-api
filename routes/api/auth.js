@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const ctrl = require("../../controllers/Users/index");
+const ctrl = require("../../controllers/Users");
 const { validateBody, authenticate } = require("../../middlewares");
 const { authSchema } = require("../../schemas/contacts");
 
