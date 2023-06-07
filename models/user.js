@@ -28,7 +28,7 @@ const userSchema = new Schema(
   { versionKey: false, timestamps: true }
 );
 
-userSchema.pre("save", handleMongooseError);
+userSchema.post("save", handleMongooseError);
 
 const User = model("User", userSchema);
 

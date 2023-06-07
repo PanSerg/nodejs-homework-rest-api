@@ -11,20 +11,14 @@ const register = async (req, res) => {
   }
 
       // Хеширование пароля
-    const result = await bcrypt.hash(password, 10);
+  const result = await bcrypt.hash(password, 10);
  
   const newUser = await User.create({ ...req.body, password: result });
  // Возврат данных на фронт
-  res
-    .status(201)
-    .json({ email: newUser.email, subscription: newUser.subscription });
+  res.status(201).json({
+    email: newUser.email,
+    subscription: newUser.subscription
+  });
 };
-//   // Создание пользователя с хешованым паролем
-//   const hashPassword = await bcrypt.hash(password, 10);
-//   const newUser = await User.create({ ...req.body, password: hashPassword });
-
-//   // Возвращение данных на фронт
-//   res.status(201).json({ email: newUser.email });
-// };
 
 module.exports = register;
