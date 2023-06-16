@@ -12,7 +12,7 @@ router.post(
 
 router.get("/verify/:verificationToken", ctrl.verifyEmail);
 
-// router.post("verify", validateBody(), ctrl.resendVerifyEmail);
+router.post("verify", validateBody(authSchema), ctrl.resendVerifyEmail);
 
 router.post("/login", validateBody(authSchema.loginSchema), ctrl.login);
 

@@ -7,10 +7,14 @@ const { SECRET_KEY } = process.env;
 // Ищем пользователя по его email
 const login = async (req, res) => {
   const { email, password } = req.body;
+
   const user = await User.findOne({ email });
   if (!user) {
     throw HttpError(401, "Email or password invalid");
-    }
+  }
+  if (!user.verify) {
+    throw HttpError(401, "Not Email verify");
+  }
     // по паролю
     const compareResult = await bcrypt.compare(password, user.password);
     if (!compareResult) {

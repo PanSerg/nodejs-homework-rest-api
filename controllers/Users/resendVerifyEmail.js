@@ -4,7 +4,7 @@ const User = require("../../models/user");
 const { BASE_URL } = process.env;
 
 const resendVerifyEmail = async (req, res) => {
-  const email = req.body;
+  const { email } = req.body;
   const user = await User.findOne({ email });
 
   if (!user) throw HttpError(404, "User not found");
