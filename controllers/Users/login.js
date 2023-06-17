@@ -9,9 +9,13 @@ const login = async (req, res) => {
   const { email, password } = req.body;
 
   const user = await User.findOne({ email });
+  
   if (!user) {
     throw HttpError(401, "Email or password invalid");
   }
+  user.verify = true;
+  await user.save();
+
   if (!user.verify) {
     throw HttpError(401, "Not Email verify");
   }
