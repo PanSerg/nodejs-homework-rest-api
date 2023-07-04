@@ -1,7 +1,7 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 const ctrl = require("../../controllers/Users");
-const { validateBody, authenticate, upload } = require("../../middlewares");
+const { validateBody, authenticate } = require("../../middlewares");
 const { authSchema } = require("../../schemas/contacts");
 
 router.post(
@@ -10,19 +10,21 @@ router.post(
   ctrl.register
 );
 
+router.get("/verify/:verificationToken", ctrl.verifyEmail);
+
+router.post("verify", validateBody(authSchema), ctrl.resendVerifyEmail);
+
 router.post("/login", validateBody(authSchema.loginSchema), ctrl.login);
 
 router.get("/current", authenticate, ctrl.getCurrent);
 
 router.post("/logout", authenticate, ctrl.logout);
 
-router.patch("/", validateBody(authSchema.subscript),
-  authenticate, ctrl.updateSubscription);
-
 router.patch(
-  "/avatars",
+  "/",
+  validateBody(authSchema.subscript),
   authenticate,
-  upload.single("avatar"),
-  ctrl.patchAvatar);
+  ctrl.updateSubscription
+);
 
 module.exports = router;
